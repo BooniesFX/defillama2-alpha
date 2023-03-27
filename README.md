@@ -1,10 +1,11 @@
-# defillama2
+# defillama2alpha
 
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
 [![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)
+[![Python 3.11](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3110/)
 
 ## Python client for DeFiLlama API
 
@@ -12,11 +13,9 @@ Download data from DefiLlama.com via its [APIs](https://defillama.com/docs/api).
 This package gets you tidy pandas data frames that are ready for downstream 
 analysis and modeling.
 
-![](https://github.com/coindataschool/defillama2/blob/main/splash.png)
-
 ### Installation
 
-`pip install defillama2`
+`python setup.py install`
 
 ### Quick Start
 
@@ -102,10 +101,10 @@ obj.get_pool_hist_apy(pool_id)  # pool_id can be obtained from get_pools_yields(
 
 ### Demo Code
 
-- [Get TVL and other fundamental data](https://github.com/coindataschool/defillama2/blob/main/notebooks/defillama_api_tvl.ipynb).
-- [Get on-chain prices, including exotic tokens](https://github.com/coindataschool/defillama2/blob/main/notebooks/defillama_api_coins.ipynb).
-- [Get circulating amount, mcap, prices and other data points for stablecoins](https://github.com/coindataschool/defillama2/blob/main/notebooks/defillama_api_stablecoins.ipynb).
-- [Get liquidity pools' yields data](https://github.com/coindataschool/defillama2/blob/main/notebooks/defillama_api_yields.ipynb).
-- [Get dexes volumes](https://github.com/coindataschool/defillama2/blob/main/notebooks/defillama_api_volumes.ipynb)
-- [Get bridges transaction tokens and volumes](https://github.com/coindataschool/defillama2/blob/main/notebooks/defillama_api_bridges.ipynb)
-- [Get protocols fees and revenue](https://github.com/coindataschool/defillama2/blob/main/notebooks/defillama_api_fees_and_revenue.ipynb)
+- [Get TVL and other fundamental data](https://github.com/BooniesFX/defillama2-alpha/blob/main/notebooks/defillama_api_tvl.ipynb).
+- [Get on-chain prices, including exotic tokens](https://github.com/BooniesFX/defillama2-alpha/blob/main/notebooks/defillama_api_coins.ipynb).
+- [Get circulating amount, mcap, prices and other data points for stablecoins](https://github.com/BooniesFX/defillama2-alpha/blob/main/notebooks/defillama_api_stablecoins.ipynb).
+- [Get liquidity pools' yields data](https://github.com/BooniesFX/defillama2-alpha/blob/main/notebooks/defillama_api_yields.ipynb).
+- [Get dexes volumes](https://github.com/BooniesFX/defillama2-alpha/blob/main/notebooks/defillama_api_volumes.ipynb)
+- [Get bridges transaction tokens and volumes](https://github.com/BooniesFX/defillama2-alpha/blob/main/notebooks/defillama_api_bridges.ipynb)
+- [Get protocols fees and revenue](https://github.com/BooniesFX/defillama2-alpha/blob/main/notebooks/defillama_api_fees_and_revenue.ipynb)
