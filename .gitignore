@@ -1,3 +1,8 @@
 build/*
 dist/*
 defillama2.egg-info/*
+defillama2alpha.egg-info/dependency_links.txt
+defillama2alpha.egg-info/PKG-INFO
+defillama2alpha.egg-info/requires.txt
+defillama2alpha.egg-info/SOURCES.txt
+defillama2alpha.egg-info/top_level.txt
