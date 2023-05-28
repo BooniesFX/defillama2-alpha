@@ -1,0 +1,547 @@
+Help on DefiLlama in module defillama2alpha.defillama2alpha object:
+
+class DefiLlama(builtins.object)
+   Implements methods for calling DeFiLlama APIs and cleaning returned data.
+   
+   Methods defined here:
+   
+   __init__(self)
+       Initialize self.  See help(type(self)) for accurate signature.
+   
+   get_24h_token_volume_this_bridge(self, bridge_id, chain, date)
+       Get 24hr token and volume breakdown for a bridge. 
+       
+       Parameters:
+       bridge_id : int
+           Unique identifier of a bridge. For example, 1 is Polygon PoS. You 
+           can look up all id values in the `id` column returned by calling
+           `get_bridges_volumes()`.
+       chain : str
+           Chain name. For example, 'Ethereum'.
+       date : str
+           Date string of format '%Y-%m-%d', for example, '2022-12-01'. Data 
+           returned will be for the 24hr period starting at 00:00 UTC on `date`.
+       
+       Returns :
+       data frame
+   
+   get_bridge_volume(self, bridge_id)
+       Get volume summary of a particular bridge and volume breakdown by chain.
+       
+       Parameters:
+       bridge_id : int
+           Unique identifier of a bridge. For example, 1 is Polygon PoS. You 
+           can look up all id values in the `id` column returned by calling
+           `get_bridges_volumes()`.
+       
+       Returns :
+       dictionary of data frames
+   
+   get_bridges_volumes(self)
+       Get all bridges along with summaries of recent bridge volumes.
+       
+       Returns :
+       data frame
+   
+   get_chain_hist_tvl(self, chain)
+       Get historical TVL of a chain.
+       
+       Parameters:
+       chain : string
+           Chain name.
+       
+       Returns :
+       data frame
+   
+   get_chains_curr_tvl(self)
+       Get current TVL of all chains.
+       
+       Returns :
+       data frame
+   
+   get_closest_block(self, chain, timestamp)
+       Get the closest block to a timestamp.
+       
+       Parameters:
+       chain : string
+           Name of the chain.
+       timestamp : string
+           Human-readable timestamp in utc, for example, '2021-09-25 00:27:53'.
+       
+       Returns :
+       data frame
+   
+   get_daily_fees_this_protocol(self, protocol, data_type='dailyFees')
+       Get daily fees (paid by users) or revenue (accrued by the protocol) 
+       of a protocol.
+       
+       Parameters:
+       protocol : string
+           Name of protocol. For example, 'gmx'.
+       data_type : string
+           Possible values are 'dailyFees', 'totalFees', 'dailyRevenue', or 
+           'totalRevenue', where fees are paid by users whereas revenue is 
+           fees accrued to the protocol. So fees != revenue here.
+       
+       Returns :
+       data frame
+   
+   get_daily_open_close(self, token_addrs_n_chains, start, end, kind='close')
+       Get historical daily open and close prices of tokens by contract 
+       address. Data on both the starting and end dates are included. 
+       
+       Parameters:
+       token_addrs_n_chains : dictionary
+           Each key is a token address; each value is a chain where the token 
+           address resides. If getting price from coingecko, use token name as 
+           key and 'coingecko' as value. For example, 
+           {'0xdF574c24545E5FfEcb9a659c229253D4111d87e1':'ethereum',
+            'ethereum':'coingecko'}
+       start : string
+           Start date, for example, '2021-01-01'
+       end : string
+           End date, for example, '2022-01-01'
+       kind : string
+           Either 'close' (default, at 23:59:59) or 'open' (at 00:00:00). Does 
+           NOT support other values at the moment.
+       
+       Returns :
+       data frame
+   
+   get_daily_volume_this_bridge(self, bridge_id, chain='all')
+       Get historical volumes for a bridge on a particular chain or on all 
+       chains.
+       
+       Parameters:
+       bridge_id : int
+           Unique identifier of a bridge. For example, 1 is Polygon PoS. You 
+           can look up all id values in the `id` column returned by calling
+           `get_bridges_volumes()`.
+       chain : str
+           Chain name. For example, 'Ethereum'. Default is 'all' for volume on 
+           all chains.
+       
+       Returns :
+       data frame
+   
+   get_daily_volumes_this_dex(self, dex, data_type='dailyVolume')
+       Get historical daily transaction volumes of a dex.
+       
+       Parameters:
+       dex : string
+           Name of dex. For example, 'uniswap'.
+       data_type : string
+           Possible values are 'dailyVolume' or 'totalVolume'. It seems 
+           'totalVolume' isn't used on DeFiLlama's website. So use 
+           'dailyVolume' for most cases.
+       
+       Returns :
+       data frame
+   
+   get_daily_volumes_this_options_dex(self, dex, data_type='dailyNotionalVolume')
+       Get historical daily transaction volumes of an options dex.
+       
+       Parameters:
+       dex : string
+           Name of options dex. For example, 'lyra', 'premia'.
+       data_type : string
+           Possible values are 'dailyNotionalVolume', 'dailyPremiumVolume',
+           'totalNotionalVolume', or 'totalPremiumVolume'.
+       
+       Returns :
+       data frame
+   
+   get_defi_hist_tvl(self)
+       Get historical TVL of DeFi on all chains.
+       
+       Returns :
+       data frame
+   
+   get_dexes_volumes(self, data_type='dailyVolume')
+       Get transaction volumes of all dexes, including 'Dexes', 
+       'Derivatives', and 'Yield' protocols.
+       
+       Parameters:
+       data_type : string
+           Possible values are 'dailyVolume' or 'totalVolume'. It seems 
+           'totalVolume' isn't used on DeFiLlama's website. So use 
+           'dailyVolume' for most cases.
+       
+       Returns :
+       dictionary of data frames: 
+           - volume_overall
+           - volume_by_dex 
+           - volume_by_dex_by_chain_24h
+           - daily_volume
+           - daily_volume_by_dex
+   
+   get_dexes_volumes_this_chain(self, chain, data_type='dailyVolume')
+       Get transaction volumes of all dexes, including 'Dexes', 
+       'Derivatives', and 'Yield' protocols from a particular chain.
+       
+       Parameters:
+       chain : string
+           Name of blockchain. For example, 'ethereum'. List of all supported 
+           chains can be found in the output of get_dexes_volumes().
+       data_type : string
+           Possible values are 'dailyVolume' or 'totalVolume'. It seems 
+           'totalVolume' isn't used on DeFiLlama's website. So use 
+           'dailyVolume' for most cases.
+       
+       Returns :
+       dictionary of data frames: 
+           - volume_overall
+           - volume_by_dex 
+           - volume_by_dex_by_chain_24h
+           - daily_volume
+           - daily_volume_by_dex
+   
+   get_fees(self, data_type='dailyFees')
+       Get fees paid to or fees accrued (revenue) by all protocols.
+       
+       Parameters:
+       data_type : string
+           Possible values are 'dailyFees', 'totalFees', 'dailyRevenue', or 
+           'totalRevenue', where fees are paid by users whereas revenue is 
+           fees accrued to the protocol. So fees != revenue here.
+       
+       Returns :
+       dictionary of data frames: 
+           - fees_overall (or revenue_overall)
+           - fees_by_dex (or revenue_by_dex)
+           - fees_by_dex_by_chain_24h (or revenue_by_dex_by_chain_24h)
+           - daily_fees (or daily_revenue)
+           - daily_fees_by_dex (or daily_revenue_by_dex)
+   
+   get_fees_this_chain(self, chain, data_type='dailyFees')
+       Get fees paid to or fees accrued (revenue) by all protocols from a 
+       particular chain.
+       
+       Parameters:
+       chain : string
+           Name of blockchain. For example, 'ethereum'. List of all supported 
+           chains can be found in the output of get_fees().
+       data_type : string
+           Possible values are 'dailyFees', 'totalFees', 'dailyRevenue', or 
+           'totalRevenue', where fees are paid by users whereas revenue is 
+           fees accrued to the protocol. So fees != revenue here.
+       
+       Returns :
+       dictionary of data frames: 
+           - fees_overall (or revenue_overall)
+           - fees_by_dex (or revenue_by_dex)
+           - fees_by_dex_by_chain_24h (or revenue_by_dex_by_chain_24h)
+           - daily_fees (or daily_revenue)
+           - daily_fees_by_dex (or daily_revenue_by_dex)
+   
+   get_options_dexes_volumes(self, data_type='dailyNotionalVolume')
+       Get transaction volumes of all options dexes.
+       
+       Parameters:
+       data_type : string
+           Possible values are 'dailyNotionalVolume', 'dailyPremiumVolume',
+           'totalNotionalVolume', or 'totalPremiumVolume'.
+       
+       Returns :
+       dictionary of data frames: 
+           - volume_overall
+           - volume_by_dex 
+           - volume_by_dex_by_chain_24h
+           - daily_volume
+           - daily_volume_by_dex
+   
+   get_options_dexes_volumes_this_chain(self, chain, data_type='dailyNotionalVolume')
+       Get transaction volumes of all options dexes from a particular chain.
+       
+       Parameters:
+       chain : string
+           Name of blockchain. For example, 'ethereum'. List of all supported 
+           chains can be found in the output of get_dexes_volumes().
+       data_type : string
+           Possible values are 'dailyNotionalVolume', 'dailyPremiumVolume',
+           'totalNotionalVolume', or 'totalPremiumVolume'.
+       
+       Returns :
+       dictionary of data frames: 
+           - volume_overall
+           - volume_by_dex 
+           - volume_by_dex_by_chain_24h
+           - daily_volume
+           - daily_volume_by_dex
+   
+   get_pool_hist_apy(self, pool_id)
+       Get historical APY and TVL of a pool.
+       
+       Parameters:
+       pool_id : str 
+           Pool id, you can get it from the `pool` column after calling 
+           get_pools_yields().
+       
+       Returns :
+       data frame
+   
+   get_pools_yields(self)
+       Get the latest data for all pools, including enriched info such as 
+       predictions.
+       
+       Returns :
+       data frame
+   
+   get_prices_at_regular_intervals(self, token_addrs_n_chains, end, end_format=None, span=30, period='4h')
+       Get prices of tokens before user-supplied end time at regular intervals.
+       
+       Parameters:
+       token_addrs_n_chains : dictionary
+           Each key is a token address; each value is a chain where the token 
+           address resides. If getting price from coingecko, use token name as 
+           key and 'coingecko' as value. For example, 
+           {'0xdF574c24545E5FfEcb9a659c229253D4111d87e1':'ethereum',
+            'ethereum':'coingecko'}
+       end : str
+           Datetime string. For example, '2022-12-01' or '2012-12-01 08:15:00'
+       end_format : str
+           Datetime string format for parsing `end`. For example, 
+           '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S'.
+       span : int
+           Number of price points, defaults to 30.
+       period : str
+           Duration between data points, defaults to '4h'. Can use regular 
+           chart candle notion like '4h' etc where: W = week, D = day, 
+           H = hour, M = minute (not case sensitive).
+           
+       Returns :
+       data frame
+   
+   get_protocol(self, protocol)
+       Get detailed info on a protocol and breakdowns by token and chain.
+       
+       Parameters:
+       protocol : string
+           Protocol name.
+       
+       Returns :
+       dictionary
+   
+   get_protocol_curr_tvl(self, protocol)
+       Get current TVL of a protocol.
+       
+       Parameters:
+       protocol : string
+           Protocol name.
+       
+       Returns :
+       float
+   
+   get_protocol_curr_tvl_by_chain(self, protocol)
+       Get current TVL of a protocol.
+       
+       Parameters:
+       protocol : string
+           Protocol name.
+       
+       Returns :
+       data frame
+   
+   get_protocol_hist_tvl_by_chain(self, protocol)
+       Get historical TVL of a protocol by chain.
+       
+       Parameters:
+       protocol : string
+           Protocol name.
+       
+       Returns :
+       dict of data frames
+   
+   get_protocols(self)
+       Get detailed information on all protocols. 
+       
+       Returns :
+       data frame
+   
+   get_protocols_fundamentals(self)
+       Get current TVL, MCap, FDV, 1d and 7d TVL % change on all protocols.
+       
+       Parameters:
+       protocol : string
+           Protocol name.
+       
+       Returns :
+       data frame
+   
+   get_stablecoin_hist_mcap(self, id)
+       Get all available historical mcap values for a stablecoin.
+       
+       Parameters:
+       id : int 
+           Stablecoin ID, you can get these from get_stablecoins_circulating().
+           For example, USDT has id 1, USDC 2, Frax 6.
+       
+       Returns :
+       data frame
+   
+   get_stablecoin_hist_mcap_on_a_chain(self, id, chain)
+       Get all available historical mcap values for a stablecoin on a 
+       particular chain.
+       
+       Parameters:
+       id : int 
+           Stablecoin ID, you can get it from get_stablecoins_circulating().
+           For example, USDT has id 1, USDC 2, Frax 6.
+       chain : string
+           Name of the chain where the stablecoin resides.
+       
+       Returns :
+       data frame
+   
+   get_stablecoins_circulating(self, include_price=False)
+       Get the circulating amounts for all stablecoins.
+       
+       Parameters:
+       include_price : logical (default=False)
+           Whether to include current stablecoin prices. Seems like it doesn't
+           do anything and the returned data doesn't return current price even 
+           set to True.
+       
+       Returns :
+       data frame
+   
+   get_stablecoins_circulating_by_chain(self, include_price=False)
+       Get the circulating amounts for all stablecoins, broken down by chain.
+       
+       Parameters:
+       include_price : logical (default=False)
+           Whether to include current stablecoin prices. Seems like it doesn't
+           do anything and the returned data doesn't return current price even 
+           set to True.
+       
+       Returns :
+       dictionary where the keys are stablecoin symbols and values are data frames.
+   
+   get_stablecoins_curr_mcap_by_chain(self)
+       Get current mcap sum of all stablecoins on each chain.
+       
+       Returns :
+       data frame
+   
+   get_stablecoins_prices(self)
+       Get historical prices of all stablecoins.
+       
+       Returns :
+       data frame
+   
+   get_tokens_curr_prices(self, token_addrs_n_chains)
+       Get current prices of tokens by contract address.
+       
+       Parameters:
+       token_addrs_n_chains : dictionary
+           Each key is a token address; each value is a chain where the token 
+           address resides. If getting price from coingecko, use token name as 
+           key and 'coingecko' as value. For example, 
+           {'0xdF574c24545E5FfEcb9a659c229253D4111d87e1':'ethereum',
+            'ethereum':'coingecko'}
+       
+       Returns :
+       data frame
+   
+   get_tokens_earliest_prices(self, token_addrs_n_chains)
+       Get earliest timestamp price record for tokens.
+       
+       Parameters:
+       token_addrs_n_chains : dictionary
+           Each key is a token address; each value is a chain where the token 
+           address resides. If getting price from coingecko, use token name as 
+           key and 'coingecko' as value. For example, 
+           {'0xdF574c24545E5FfEcb9a659c229253D4111d87e1':'ethereum',
+            'ethereum':'coingecko'}
+       
+       Returns :
+       data frame
+   
+   get_tokens_hist_batch_prices(self, chain_token_addr_timestamps)
+       Get historical prices of tokens by chain at multiple timestamps.
+       
+       Parameters:
+       chain_token_addr_timestamps : dictionary
+           Each key is a chain:token_address; each value is a list of unix 
+           timestamps in seconds. For example, 
+           {"avax:0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e": 
+               [1666876743, 1666862343],
+            "coingecko:ethereum": [1666869543, 1666862343]}
+       
+       Returns :
+       data frame
+   
+   get_tokens_hist_prices(self, token_addrs_n_chains, start, end, freq='hourly')
+       Get historical hourly or daily prices of tokens by contract address. 
+       Data on both the starting and end dates are included. If you only want 
+       daily open/close prices, use get_daily_open_close().
+       
+       Parameters:
+       token_addrs_n_chains : dictionary
+           Each key is a token address; each value is a chain where the token 
+           address resides. If getting price from coingecko, use token name as 
+           key and 'coingecko' as value. For example, 
+           {'0xdF574c24545E5FfEcb9a659c229253D4111d87e1':'ethereum', 
+            'ethereum':'coingecko'}
+       start : string
+           Start date, for example, '2022-11-01'
+       end : string
+           End date, for example, '2022-11-30'. 
+       freq : string
+           Data granularity, 'hourly' (default) or 'daily'. Does NOT support 
+           other values at the moment.
+       
+       Returns :
+       data frame
+   
+   get_tokens_hist_snapshot_prices(self, token_addrs_n_chains, timestamp)
+       Get historical snapshot prices of tokens by contract address.
+       
+       Parameters:
+       token_addrs_n_chains : dictionary
+           Each key is a token address; each value is a chain where the token 
+           address resides. If getting price from coingecko, use token name as 
+           key and 'coingecko' as value. For example, 
+           {'0xdF574c24545E5FfEcb9a659c229253D4111d87e1':'ethereum',
+            'ethereum':'coingecko'}
+       timestamp : string
+           Human-readable timestamp in utc, for example, '2021-09-25 00:27:53'
+       
+       Returns :
+       data frame
+   
+   get_tx_this_bridge(self, bridge_id, sourcechain, start, end, fromToAddrs_chains, limit=200)
+       Get all transactions for a bridge from a source chain within a date 
+       range.
+       
+       Parameters:
+       bridge_id : int
+           Unique identifier of a bridge. For example, 1 is Polygon PoS. You 
+           can look up all id values in the `id` column returned by calling
+           `get_bridges_volumes()`.
+       sourcechain : str
+           Name of the chain bridging from. For example, 'Ethereum'.
+       start : str
+           Start of the date range. Date string of format '%Y-%m-%d', 
+           for example, '2022-12-01'. 
+       end : str
+           End of the date range. Date string of format '%Y-%m-%d', 
+           for example, '2022-12-01'. 
+       fromToAddrs_chains : dict
+           A dictionary with "from" or "to" addresses as keys and chain names 
+           as values. Example chain names are ethereum, bsc, polygon, avax... .
+       limit : int
+           Number of transactions returned, maximum is 6000.
+           
+       Returns :
+       data frame
+   
+   ----------------------------------------------------------------------
+   Data descriptors defined here:
+   
+   __dict__
+       dictionary for instance variables (if defined)
+   
+   __weakref__
+       list of weak references to the object (if defined)
+
